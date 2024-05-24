@@ -1,21 +1,21 @@
 <div class="container">
   <h1 class="mt-4">Controle de Convites para o Jantar 28 de maio</h1>
 
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills" style="background-color: #81cbdd;">
     <li class="nav-item">
-      <a
+      <a 
         [ngClass]="{'nav-link active': link1==true, 'nav-link': link1==false, }"
-        (click)="Clique1()" aria-current="page">Lista de Convites</a>
+        (click)="Clique1()" aria-current="page" routerLink="/home">Lista de Convites</a>
     </li>
     <li class="nav-item">
-      <a
+      <a 
         [ngClass]="{'nav-link active': link2==true, 'nav-link': link2==false, }"
-        (click)="Clique2()" aria-current="page">Cadastrar</a>
+        (click)="Clique2()" aria-current="page" routerLink="/cadastrar">Cadastrar</a>
     </li>
     <li class="nav-item">
       <a
         [ngClass]="{'nav-link active': link3==true, 'nav-link': link3==false, }"
-        (click)="Clique3()" aria-current="page">Receber</a>
+        (click)="Clique3()" aria-current="page" routerLink="/receber">Receber</a>
     </li>
   </ul>
 </div>

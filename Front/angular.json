@@ -80,7 +80,7 @@
             },
             "development": {
               "browserTarget": "assitente:build:development",
-              "port":4203
+              "port":4201
             }
           },
           "defaultConfiguration": "development"

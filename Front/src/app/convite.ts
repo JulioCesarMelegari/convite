@@ -1,5 +1,5 @@
 export class Convite {
-  id!: number;
+  id!:number|undefined;
   nomeCliente!: String;
   usuarioCadastro!: String;
   usuarioPagamento!: String;

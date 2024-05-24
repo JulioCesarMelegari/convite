@@ -1,4 +1,4 @@
-export class Cadstro {
+export class Cadastro {
   nomeCliente!: String;
   usuarioCadastro!: String;
   nomeVendedor!: String;

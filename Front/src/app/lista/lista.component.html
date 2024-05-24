@@ -1,1 +1,70 @@
-<p>lista works!</p>
+<div class="container">
+    <ol class="breadcrumb mb-4">
+        <h3 class="breadcrumb-item active">Convites Cadastrados:</h3>
+    </ol>
+
+
+    <div class="table-responsive">
+
+        <table class="table table-hover table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">Qtdade</th>
+                    <th scope="col">Cadastrado por</th>
+                    <th scope="col">Obs. Cadastro</th>
+                    <th scope="col">Pago</th>
+                    <th scope="col">Entregue</th>
+                    <th scope="col">Recebido por</th>
+                    <th scope="col">Data Recebimento</th>
+                    <th scope="col">Obs .Rcto</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let convite of listConvites | async">
+
+                    <td>{{convite.id}}</td>
+                    <td>{{convite.nomeCliente}}</td>
+                    <td>{{convite.nomeVendedor}}</td>
+                    <td>{{convite.quantidade}}</td>
+                    <td>{{convite.usuarioCadastro}}</td>
+                    <td>{{convite.observacaoCadastro}}</td>
+                    <td>{{convite.pago}}</td>
+                    <td>{{convite.entregue}}</td>
+                    <td>{{convite.usuarioPagamento}}</td>
+                    <td>{{convite.dataPagamento}}</td>
+                    <td>{{convite.observacaoPagamento}}</td>
+                    <td>
+                        <button class="btn btn-primary" routerLink="/cadastrar/{{convite.id}}">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+            </tbody>
+        </table>
+    </div>
+    <!--
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-warning" (click)="ListarPagos()">
+                    <i  class="fa-solid fa-list"></i> Pagos
+                </button>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-warning" (click)="ListarPendentes()">
+                    <i  class="fa-solid fa-list"></i> Pendentes
+                </button>
+            </div>
+
+        </div>
+    </div>
+    -->
+
+
+</div>

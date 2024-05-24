@@ -20,7 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping()
-@CrossOrigin("http://localhost:4203")
+//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4201")
 public class ConviteController {
 	
 	@Autowired
@@ -54,6 +55,12 @@ public class ConviteController {
 	public ResponseEntity<List<Convite>> listarCadastrados(){
 		List<Convite> list = repository.ListaOrdenada();
 		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Convite> ConviteById(@PathVariable Integer id){
+		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
+		return ResponseEntity.status(HttpStatus.OK).body(convite);
 	}
 	
 	@GetMapping("/pendentes")

@@ -1,1 +1,84 @@
-<p>recebimento works!</p>
+<div class="container">
+    <ol class="breadcrumb mb-4">
+        <h3 class="breadcrumb-item active">Cadastro</h3>
+    </ol>
+
+    <form action [formGroup]="formularioPagamento" (ngSubmit)="onSubmit()">
+
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success" role="alert" *ngIf="success==true">
+                    Pagamento Salvo!
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Data Pagamento:</label>
+                    <input type="date" class="form-control" formControlName="dataPagamento" name="dataPagamento" [value]="conviteEdit.dataPagamento">
+                </div>
+                <div *ngIf="formularioPagamento.get('dataPagamento')?.invalid || formularioPagamento.get('dataPagamento')?.touched" class="mensagem">
+                    Campo obrigatório.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="pago" name="pago" id="true" [value]="true">
+                <label class="form-check-label" for="flexRadioDefault1">Pago</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="pago" name="pago" id="false" [value]="false">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Não Pago
+                </label>
+              </div>
+        </div>
+
+        <div class="row">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="entregue" name="entregue" id="true" [value]="true">
+                <label class="form-check-label" for="flexRadioDefault1">Entregue</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="entregue" name="entregue" id="false" [value]="false">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Não Entregue
+                </label>
+              </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Observação:</label>
+                    <input type="text" class="form-control" formControlName="observacaoPagamento" name="observacaoPagamento" [value]="conviteEdit.observacaoPagamento">
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="col">
+            <div class="row">
+
+                <div class="col" style="padding-bottom: 3px">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-refresh" aria-hidden="true"></i> Atualizar
+                    </button>
+                </div>
+
+                <div class="col" style="padding-bottom: 3px">
+                    <button type="button" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Excluir
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
