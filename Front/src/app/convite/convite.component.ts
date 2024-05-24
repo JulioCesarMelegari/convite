@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Convite } from '../convite';
 import { ConviteService } from '../convite.service';
+import { Cadstro } from '../cadastro';
+import { Usuario } from '../usuario';
 
 @Component({
   selector: 'app-convite',
@@ -10,10 +12,12 @@ import { ConviteService } from '../convite.service';
 })
 export class ConviteComponent implements OnInit {
 
-  formConvite!: FormGroup;
+  formularioConvite!: FormGroup;
   success: boolean = false;
 
-  conviteEdit:Convite;
+  conviteEdit:Cadstro;
+
+  usuario:Usuario;
 
   ngOnInit(): void {
     this.createForm(new Convite());
@@ -21,29 +25,28 @@ export class ConviteComponent implements OnInit {
 
   constructor(private service: ConviteService,
     private formBuilder: FormBuilder){
-    this.conviteEdit = new Convite();
+    this.conviteEdit = new Cadstro();
+    this.usuario = new Usuario();
+    this.usuario.nome='julio';
   }
 
-  createForm(convite:Convite){
-    this.formConvite = this.formBuilder.group({
+  createForm(convite:Cadstro){
+    this.formularioConvite = this.formBuilder.group({
       nomeCliente: [convite.nomeCliente],
-      dataPagamento: [convite.dataPagamento],
       nomeVendedor: [convite.nomeVendedor],
-      observacao: [convite.observacao],
-      quantidade: [convite.quantidade]
+      observacaoCadastro: [convite.observacaoCadastro],
+      quantidade: [convite.quantidade],
+      usuarioCadastro: [this.usuario.nome]
     });
   }
 
   onSubmit(){
-    this.service.salvarConvite(this.formConvite.value)
+    this.service.salvarConvite(this.formularioConvite.value)
         .subscribe(response =>{
           this.success = true;
           console.log(response);
-          this.formConvite.reset(new Convite());
+          this.formularioConvite.reset(new Convite());
         })
   }
-
-
-
 
 }

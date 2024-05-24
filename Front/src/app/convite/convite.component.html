@@ -1,10 +1,9 @@
 <div class="container">
-    <h1 class="mt-4">Controle de Convites para o Jantar 28 de maio</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Cadastro</li>
     </ol>
-    
-    <form action [formGroup]="formConvite" (ngSubmit)="onSubmit()">
+
+    <form action [formGroup]="formularioConvite" (ngSubmit)="onSubmit()">
 
         <div class="row">
             <div class="col">
@@ -37,14 +36,6 @@
                 <label>Quantidade</label>
                 <input type="number" class="form-control" formControlName="quantidade" name="quantidade">
             </div>
-        </div>
-
-        <div class="col">
-            <div class="form-group">
-                <label>Data Pagamento</label>
-                <input type="Date" class="form-control" formControlName="dataPagamento" name="dataPagamento">
-            </div>
-
         </div>
 
         <div class="row">

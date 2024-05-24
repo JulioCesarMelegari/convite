@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Convite } from './convite';
 import { Observable } from 'rxjs';
+import { Cadstro } from './cadastro';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class ConviteService {
 
   constructor(private httpClient: HttpClient) { }
 
-  salvarConvite(convite:Convite):Observable<Convite>{
-    return this.httpClient.post<Convite>(this.NewbaseUrl, convite);
+  salvarConvite(formConvite:Cadstro):Observable<Cadstro>{
+    return this.httpClient.post<Cadstro>(this.NewbaseUrl, formConvite);
   }
 
 }

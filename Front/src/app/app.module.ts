@@ -8,11 +8,17 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ConviteComponent } from './convite/convite.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ListaComponent } from './lista/lista.component';
+import { RecebimentoComponent } from './recebimento/recebimento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConviteComponent
+    ConviteComponent,
+    NavbarComponent,
+    ListaComponent,
+    RecebimentoComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +27,7 @@ import { ConviteComponent } from './convite/convite.component';
     AppRoutingModule,
     RouterModule,
     CommonModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt'},
