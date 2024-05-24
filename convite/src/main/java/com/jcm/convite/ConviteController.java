@@ -26,32 +26,75 @@ public class ConviteController {
 	@Autowired
 	private ConviteRepository repository;
 	
-	@PostMapping
-	public ResponseEntity<Convite> salvar(@RequestBody Convite convite){
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Convite> cadastrar(@RequestBody FormCreate formCreate){
+		var convite = new Convite();
+		BeanUtils.copyProperties(formCreate, convite);
 		repository.save(convite);
 		return ResponseEntity.status(HttpStatus.CREATED).body(convite);	
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<Convite>> listar(){
-		List<Convite> list = repository.listaOrdenada();
+	@PutMapping("/pagar/{id}")
+	public ResponseEntity<Convite> receber(@PathVariable Integer id, @RequestBody FormRecebiment formRecebiment){
+		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
+		BeanUtils.copyProperties(formRecebiment, convite);
+		repository.save(convite);
+		return ResponseEntity.status(HttpStatus.CREATED).body(convite);	
+	}
+	
+	@PutMapping("/cadastrar/{id}")
+	public ResponseEntity<Convite> updateCadastrar(@PathVariable Integer id, @RequestBody FormCreate formCreate){
+		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
+		BeanUtils.copyProperties(formCreate, convite);
+		repository.save(convite);
+		return ResponseEntity.status(HttpStatus.OK).body(convite);
+	}
+	
+	@GetMapping()
+	public ResponseEntity<List<Convite>> listarCadastrados(){
+		List<Convite> list = repository.ListaOrdenada();
+		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/pendentes")
+	public ResponseEntity<List<Convite>> listarPendentes(){
+		List<Convite> list = repository.ConvitesPendentes();
+		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/pagos")
+	public ResponseEntity<List<Convite>> listarPagos(){
+		List<Convite> list = repository.ConvitesPagos();
+		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/naoentregues")
+	public ResponseEntity<List<Convite>> listarNaoEntregues(){
+		List<Convite> list = repository.ConvitesNaoEntreges();
+		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/entregues")
+	public ResponseEntity<List<Convite>> listarEntregues(){
+		List<Convite> list = repository.ConvitesEntreges();
 		return ResponseEntity.ok(list);
 	}
 	
 	@DeleteMapping("{id}")
 	public void deletar(@PathVariable Integer id){
+		var convite = new Convite();
+		
 		if(repository.findById(id) !=null) {
+			convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));	
+		}
+		if(convite.isPago()) {
+			ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+		}else {
 			repository.deleteById(id);
 		}
 			ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
 	
-	@PutMapping("{id}")
-	public ResponseEntity<Convite> update(@PathVariable Integer id, @RequestBody Convite conviteUpdate){
-		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
-		BeanUtils.copyProperties(convite, conviteUpdate);
-		repository.save(convite);
-		return ResponseEntity.status(HttpStatus.OK).body(convite);
-	}
+
 
 }

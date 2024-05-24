@@ -25,16 +25,22 @@ public class Convite implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_cliente")
+	@Column(name = "id_convite")
 	private Integer id;
 	
-	@Column(length = 50, nullable = false, unique = true)
+	@Column(length = 50, nullable = false)
 	private String nomeCliente;
 	
-	@Column(length = 50, nullable = false, unique = true)
+	@Column(length = 50, nullable = false)
+	private String usuarioCadastro;
+	
+	@Column(length = 50)
+	private String usuarioPagamento;
+	
+	@Column(length = 50)
 	private String nomeVendedor;
 	
-	@Column(length = 10, nullable = false, unique = true)
+	@Column(length = 10)
 	private int quantidade;
 	
 	@JsonFormat(pattern = "dd-MM-yyy")
@@ -42,13 +48,16 @@ public class Convite implements Serializable{
 	@DateTimeFormat(iso=ISO.DATE,pattern = "dd-MM-yyy")
 	private LocalDate dataPagamento;
 
-	@Column(length = 5, nullable = false, unique = true)
+	@Column(length = 5)
 	private boolean pago = false;
 	
-	@Column(length = 5, nullable = false, unique = true)
+	@Column(length = 5)
 	private boolean entregue = false;
 	
-	@Column(length = 50, nullable = false, unique = true)
-	private String observacao;
+	@Column(length = 50)
+	private String observacaoCadastro;
+	
+	@Column(length = 50)
+	private String observacaoPagamento;
 
 }
