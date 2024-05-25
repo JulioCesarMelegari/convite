@@ -5,7 +5,7 @@ public record FormCreate(
 		String nomeVendedor,
 		int quantidade,
 		String usuarioCadastro,
-		String observacaoCadastro
+		String observacao
 		) {
 
 }

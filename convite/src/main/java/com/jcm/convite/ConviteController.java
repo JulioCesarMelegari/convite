@@ -1,5 +1,6 @@
 package com.jcm.convite;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -38,11 +39,31 @@ public class ConviteController {
 	@PutMapping("/pagar/{id}")
 	public ResponseEntity<Convite> receber(@PathVariable Integer id, @RequestBody FormRecebiment formRecebiment){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
-		BeanUtils.copyProperties(formRecebiment, convite);
-		repository.save(convite);
-		return ResponseEntity.status(HttpStatus.CREATED).body(convite);	
+		
+			if(!convite.isPago()){
+				LocalDate dataRegistro = LocalDate.now();
+				BeanUtils.copyProperties(formRecebiment, convite);
+				convite.setDataPagamento(dataRegistro);
+				repository.save(convite);
+				return ResponseEntity.status(HttpStatus.CREATED).body(convite);
+			}
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 	}
 	
+	@PutMapping("/entregar/{id}")
+	public ResponseEntity<Convite> entregar(@PathVariable Integer id, @RequestBody FormEntrega formEntrega){
+		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
+		
+			if(!convite.isEntregue()){
+				LocalDate dataRegistro = LocalDate.now();
+				BeanUtils.copyProperties(formEntrega, convite);
+				convite.setDataEntrega(dataRegistro);
+				repository.save(convite);
+				return ResponseEntity.status(HttpStatus.CREATED).body(convite);
+			}
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+	}
+		
 	@PutMapping("/cadastrar/{id}")
 	public ResponseEntity<Convite> updateCadastrar(@PathVariable Integer id, @RequestBody FormCreate formCreate){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));

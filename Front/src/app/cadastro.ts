@@ -3,5 +3,5 @@ export class Cadastro {
   usuarioCadastro!: String;
   nomeVendedor!: String;
   quantidade!: number;
-  observacaoCadastro!: String;
+  observacao!: String;
 }

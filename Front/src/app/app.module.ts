@@ -4,13 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ConviteComponent } from './convite/convite.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ListaComponent } from './lista/lista.component';
 import { RecebimentoComponent } from './recebimento/recebimento.component';
+import { LikePipe } from './like.pipe';
+import { EntregaComponent } from './entrega/entrega.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RecebimentoComponent } from './recebimento/recebimento.component';
     ConviteComponent,
     NavbarComponent,
     ListaComponent,
-    RecebimentoComponent
+    RecebimentoComponent,
+    LikePipe,
+    EntregaComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,8 @@ import { RecebimentoComponent } from './recebimento/recebimento.component';
     AppRoutingModule,
     RouterModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt'},

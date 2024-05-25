@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Convite } from './convite';
 import { Observable } from 'rxjs';
 import { Cadastro } from './cadastro';
-import { FormPagamento } from './formPagamento';
+import { FormRecebimento } from './formRecebimento';
+import { FormEntrega } from './formEntrega';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,16 @@ export class ConviteService {
     return this.httpClient.put<Cadastro>(this.NewbaseUrl+'cadastrar/'+`${id}`, formConvite);
   }
 
-  pagar(id:number, formPagamento:FormPagamento):Observable<FormPagamento>{
-    return this.httpClient.put<FormPagamento>(this.NewbaseUrl+'pagar/'+`${id}`, formPagamento);
+  pagar(id:number, formPagamento:FormRecebimento):Observable<FormRecebimento>{
+    return this.httpClient.put<FormRecebimento>(this.NewbaseUrl+'pagar/'+`${id}`, formPagamento);
+  }
+
+  entregar(id:number, formEntrega:FormEntrega):Observable<FormEntrega>{
+    return this.httpClient.put<FormEntrega>(this.NewbaseUrl+'entregar/'+`${id}`, formEntrega);
+  }
+
+  deletar(id:any){
+    return this.httpClient.delete(this.NewbaseUrl+`${id}`);
   }
 
   listarTodos():Observable<Convite[]>{
@@ -51,6 +60,6 @@ export class ConviteService {
   }
 
 
-  
+
 
 }

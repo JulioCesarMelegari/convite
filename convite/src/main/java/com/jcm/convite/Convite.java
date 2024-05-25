@@ -38,15 +38,23 @@ public class Convite implements Serializable{
 	private String usuarioPagamento;
 	
 	@Column(length = 50)
+	private String usuarioEntrega;
+	
+	@Column(length = 50)
 	private String nomeVendedor;
 	
 	@Column(length = 10)
 	private int quantidade;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=ISO.DATE,pattern = "yyyy-MM-dd")
+	private LocalDate dataPagamento;
+	
 	@JsonFormat(pattern = "dd-MM-yyy")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso=ISO.DATE,pattern = "dd-MM-yyy")
-	private LocalDate dataPagamento;
+	@DateTimeFormat(iso=ISO.DATE,pattern = "yyyy-MM-dd")
+	private LocalDate dataEntrega;
 
 	@Column(length = 5)
 	private boolean pago = false;
@@ -54,10 +62,7 @@ public class Convite implements Serializable{
 	@Column(length = 5)
 	private boolean entregue = false;
 	
-	@Column(length = 50)
-	private String observacaoCadastro;
-	
-	@Column(length = 50)
-	private String observacaoPagamento;
+	@Column(length = 300)
+	private String observacao;
 
 }

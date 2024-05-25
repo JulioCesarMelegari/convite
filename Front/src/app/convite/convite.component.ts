@@ -18,6 +18,8 @@ export class ConviteComponent implements OnInit {
 
   conviteEdit: Convite;
 
+  cadastro:Cadastro;
+
   usuario: Usuario;
   idParam: any;
 
@@ -27,12 +29,13 @@ export class ConviteComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
     this.conviteEdit = new Convite();
     this.usuario = new Usuario();
+    this.cadastro = new Cadastro();
     this.usuario.nome = 'julio';
     this.formularioConvite = this.formBuilder.group({
-      nomeCliente: ['', Validators.required],
-      nomeVendedor: ['', Validators.required],
-      observacaoCadastro: [''],
-      quantidade: ['', Validators.required],
+      nomeCliente: [this.cadastro.nomeCliente, Validators.required],
+      nomeVendedor: [this.cadastro.nomeVendedor, Validators.required],
+      observacao: [this.cadastro.observacao],
+      quantidade: [this.cadastro.quantidade, Validators.required],
       usuarioCadastro: [this.usuario.nome],
     });
   }

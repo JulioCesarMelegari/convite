@@ -19,19 +19,18 @@
                     <label>Nome do Cliente:</label>
                     <input type="text" class="form-control" formControlName="nomeCliente" name="nomeCliente" [value]="conviteEdit.nomeCliente">
                 </div>
-                <div *ngIf="formularioConvite.get('nomeCliente')?.invalid || formularioConvite.get('name')?.touched" class="mensagem">
+                <div *ngIf="formularioConvite.value.nomeCliente == null" class="mensagem">
                     Campo obrigatório.
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label>Nome do Vendedor:</label>
                     <input type="text" class="form-control" formControlName="nomeVendedor" name="nomeVendedor" [value]="conviteEdit.nomeVendedor">
                 </div>
-                <div *ngIf="formularioConvite.get('nomeVendedor')?.invalid || formularioConvite.get('nomeVendedor')?.touched" class="mensagem">
+                <div *ngIf="formularioConvite.value.nomeVendedor == null" class="mensagem">
                     Campo obrigatório.
                 </div>
             </div>
@@ -42,21 +41,21 @@
                 <label>Quantidade</label>
                 <input type="number" class="form-control" formControlName="quantidade" name="quantidade" [value]="conviteEdit.quantidade">
             </div>
-            <div *ngIf="formularioConvite.get('quantidade')?.invalid || formularioConvite.get('quantidade')?.touched" class="mensagem">
+            <div *ngIf="formularioConvite.value.quantidade == null" class="mensagem">
                 Campo obrigatório.
             </div>
         </div>
 
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label>Observação:</label>
-                    <input type="text" class="form-control" formControlName="observacaoCadastro" name="observacaoCadastro" [value]="conviteEdit.observacaoCadastro">
-                </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Observação:</label>
+              <textarea class="form-control" rows="3" class="form-control"
+                formControlName="observacao"
+                name="observacao" [value]="conviteEdit.observacao"></textarea>
             </div>
+          </div>
         </div>
-
-        <br>
 
         <div class="col">
             <div class="row">
@@ -69,12 +68,6 @@
                 <div class="col" style="padding-bottom: 3px">
                     <button type="submit" class="btn btn-success" *ngIf="idParam!=null">
                         <i class="fa fa-refresh" aria-hidden="true"></i> Atualizar
-                    </button>
-                </div>
-
-                <div class="col" style="padding-bottom: 3px">
-                    <button type="button" class="btn btn-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Excluir
                     </button>
                 </div>
 
