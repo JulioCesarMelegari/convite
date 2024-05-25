@@ -17,7 +17,7 @@ export class ConviteComponent implements OnInit {
   success: boolean = false;
 
   conviteEdit: Convite;
-
+  
   cadastro:Cadastro;
 
   usuario: Usuario;

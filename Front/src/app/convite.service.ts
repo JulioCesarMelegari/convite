@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Cadastro } from './cadastro';
 import { FormRecebimento } from './formRecebimento';
 import { FormEntrega } from './formEntrega';
+import { Usuario } from './usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,13 @@ export class ConviteService {
 
   public NewbaseUrl: string = 'http://localhost:8080/convites/'
 
-  constructor(private httpClient: HttpClient) { }
+  usuario: Usuario;
+  
+  constructor(private httpClient: HttpClient) {
+    this.usuario = new Usuario();
+    this.usuario.nome = 'julio';
+    this.usuario.senha = '123';
+   }
 
   salvarConvite(formConvite:Cadastro):Observable<Cadastro>{
     return this.httpClient.post<Cadastro>(this.NewbaseUrl + 'cadastrar', formConvite);

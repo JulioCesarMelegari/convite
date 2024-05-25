@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormRecebimento } from '../formRecebimento';
 import { Convite } from '../convite';
 import { Usuario } from '../usuario';
 import { ConviteService } from '../convite.service';
@@ -17,37 +16,36 @@ export class EntregaComponent implements OnInit {
   formularioEntrega: FormGroup;
   success: boolean = false;
 
-  conviteEdit: Convite;
+  conviteResponse: Convite;
+  conviteEdit:FormEntrega;
 
-  entrega: FormEntrega;
+  usuario:Usuario;
 
-  usuario: Usuario;
   idParam: any;
 
   constructor(private service: ConviteService,
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
-    this.entrega = new FormEntrega();
-    this.conviteEdit = new Convite();
-    this.usuario = new Usuario();
-    this.usuario.nome = 'julio';
+    this.usuario=new Usuario();
+    this.conviteEdit = new FormEntrega();
+    this.conviteResponse = new Convite();
     this.formularioEntrega = this.formBuilder.group({
-      usuarioEntrega: [this.usuario.nome],
       entregue: [''],
       observacao: [''],
     });
   }
 
   ngOnInit(): void {
+    this.usuario = this.service.usuario;
     this.activatedRoute.paramMap.subscribe(params => {
       this.idParam = params.get('id');
       if (this.idParam !== null) {
         this.service.getConviteById(this.idParam).subscribe(response => {
-          this.conviteEdit = response;
+          this.conviteResponse = response;
           console.log('atualizar entrega');
-          console.log(this.conviteEdit);
-          this.formularioEntrega.patchValue(this.conviteEdit);
+          console.log(this.conviteResponse);
+          this.formularioEntrega.patchValue(this.conviteResponse);
         });
       } else {
         console.log('idParam nulo');
@@ -61,7 +59,12 @@ export class EntregaComponent implements OnInit {
     } else {
         console.log('idParam nao nulo')
         console.log(this.idParam)
-        this.service.entregar(this.idParam, this.formularioEntrega.value)
+        console.log('dados formulario')
+        this.conviteEdit.usuarioEntrega=this.usuario.nome;
+        this.conviteEdit.entregue=this.formularioEntrega.value.entregue;
+        this.conviteEdit.observacao=this.formularioEntrega.value.observacao;
+        console.log(this.conviteEdit)
+        this.service.entregar(this.idParam, this.conviteEdit)
           .subscribe(response => {
             this.success = true;
             console.log(response);
