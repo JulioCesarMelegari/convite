@@ -4,6 +4,7 @@ import { ListaComponent } from './lista/lista.component';
 import { ConviteComponent } from './convite/convite.component';
 import { RecebimentoComponent } from './recebimento/recebimento.component';
 import { EntregaComponent } from './entrega/entrega.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: 'home', component:ListaComponent},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'cadastrar/:id', component:ConviteComponent},
   {path: 'receber/:id', component:RecebimentoComponent},
   {path: 'entregar/:id', component:EntregaComponent},
+  {path: 'login', component:LoginComponent},
 ];
 
 @NgModule({

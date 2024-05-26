@@ -13,6 +13,7 @@ import { ListaComponent } from './lista/lista.component';
 import { RecebimentoComponent } from './recebimento/recebimento.component';
 import { LikePipe } from './like.pipe';
 import { EntregaComponent } from './entrega/entrega.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EntregaComponent } from './entrega/entrega.component';
     RecebimentoComponent,
     LikePipe,
     EntregaComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

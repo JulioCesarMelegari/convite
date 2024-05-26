@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
-@RequestMapping()
+@RequestMapping("/convites/")
 //@CrossOrigin(origins = "*")
 @CrossOrigin(origins = "http://localhost:4201")
 public class ConviteController {
@@ -28,7 +28,7 @@ public class ConviteController {
 	@Autowired
 	private ConviteRepository repository;
 	
-	@PostMapping("/cadastrar")
+	@PostMapping("cadastrar")
 	public ResponseEntity<Convite> cadastrar(@RequestBody FormCreate formCreate){
 		var convite = new Convite();
 		BeanUtils.copyProperties(formCreate, convite);
@@ -36,7 +36,7 @@ public class ConviteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(convite);	
 	}
 	
-	@PutMapping("/pagar/{id}")
+	@PutMapping("pagar/{id}")
 	public ResponseEntity<Convite> receber(@PathVariable Integer id, @RequestBody FormRecebiment formRecebiment){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		
@@ -50,7 +50,7 @@ public class ConviteController {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 	}
 	
-	@PutMapping("/entregar/{id}")
+	@PutMapping("entregar/{id}")
 	public ResponseEntity<Convite> entregar(@PathVariable Integer id, @RequestBody FormEntrega formEntrega){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		
@@ -64,7 +64,7 @@ public class ConviteController {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 	}
 		
-	@PutMapping("/cadastrar/{id}")
+	@PutMapping("cadastrar/{id}")
 	public ResponseEntity<Convite> updateCadastrar(@PathVariable Integer id, @RequestBody FormCreate formCreate){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		BeanUtils.copyProperties(formCreate, convite);
@@ -78,31 +78,31 @@ public class ConviteController {
 		return ResponseEntity.ok(list);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public ResponseEntity<Convite> ConviteById(@PathVariable Integer id){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		return ResponseEntity.status(HttpStatus.OK).body(convite);
 	}
 	
-	@GetMapping("/pendentes")
+	@GetMapping("pendentes")
 	public ResponseEntity<List<Convite>> listarPendentes(){
 		List<Convite> list = repository.ConvitesPendentes();
 		return ResponseEntity.ok(list);
 	}
 	
-	@GetMapping("/pagos")
+	@GetMapping("pagos")
 	public ResponseEntity<List<Convite>> listarPagos(){
 		List<Convite> list = repository.ConvitesPagos();
 		return ResponseEntity.ok(list);
 	}
 	
-	@GetMapping("/naoentregues")
+	@GetMapping("naoentregues")
 	public ResponseEntity<List<Convite>> listarNaoEntregues(){
 		List<Convite> list = repository.ConvitesNaoEntreges();
 		return ResponseEntity.ok(list);
 	}
 	
-	@GetMapping("/entregues")
+	@GetMapping("entregues")
 	public ResponseEntity<List<Convite>> listarEntregues(){
 		List<Convite> list = repository.ConvitesEntreges();
 		return ResponseEntity.ok(list);
