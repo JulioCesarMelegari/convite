@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
-@RequestMapping("/convites/")
+@RequestMapping("convites")
 //@CrossOrigin(origins = "*")
 @CrossOrigin(origins = "http://localhost:4201")
 public class ConviteController {
@@ -28,7 +28,7 @@ public class ConviteController {
 	@Autowired
 	private ConviteRepository repository;
 	
-	@PostMapping("cadastrar")
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Convite> cadastrar(@RequestBody FormCreate formCreate){
 		var convite = new Convite();
 		BeanUtils.copyProperties(formCreate, convite);
@@ -36,7 +36,7 @@ public class ConviteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(convite);	
 	}
 	
-	@PutMapping("pagar/{id}")
+	@PutMapping("/pagar/{id}")
 	public ResponseEntity<Convite> receber(@PathVariable Integer id, @RequestBody FormRecebiment formRecebiment){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		
@@ -50,7 +50,7 @@ public class ConviteController {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 	}
 	
-	@PutMapping("entregar/{id}")
+	@PutMapping("/entregar/{id}")
 	public ResponseEntity<Convite> entregar(@PathVariable Integer id, @RequestBody FormEntrega formEntrega){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		
@@ -64,7 +64,7 @@ public class ConviteController {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 	}
 		
-	@PutMapping("cadastrar/{id}")
+	@PutMapping("/cadastrar/{id}")
 	public ResponseEntity<Convite> updateCadastrar(@PathVariable Integer id, @RequestBody FormCreate formCreate){
 		var convite = repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Convite não encontrado"));
 		BeanUtils.copyProperties(formCreate, convite);
@@ -123,6 +123,4 @@ public class ConviteController {
 			ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
 	
-
-
 }

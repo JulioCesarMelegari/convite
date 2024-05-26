@@ -1,5 +1,4 @@
 package com.jcm.convite.security;
 
-public record RegisterDto(String login, String password, UserRole role) {
-
+public record RegisterDTO(String login, String password, UserRole role) {
 }
