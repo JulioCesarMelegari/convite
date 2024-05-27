@@ -31,7 +31,7 @@ export class RecebimentoComponent implements OnInit {
     this.conviteEdit=new FormRecebimento();
     this.conviteResponse=new Convite();
     this.formularioRecebimento = this.formBuilder.group({
-      usuarioPagamento: [this.usuario.nome],
+      usuarioPagamento: [this.usuario.name],
       pago: [''],
       observacao: [''],
     });
@@ -61,7 +61,7 @@ export class RecebimentoComponent implements OnInit {
         console.log('idParam nao nulo')
         console.log(this.idParam)
         console.log('dados formulario')
-        this.conviteEdit.usuarioPagamento=this.usuario.nome;
+        this.conviteEdit.usuarioPagamento=this.usuario.name;
         this.conviteEdit.pago=this.formularioRecebimento.value.pago;
         this.conviteEdit.observacao=this.formularioRecebimento.value.observacao;
         console.log(this.conviteEdit);

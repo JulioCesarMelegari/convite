@@ -15,11 +15,12 @@ export class ConviteService {
   public NewbaseUrl: string = 'http://localhost:8080/convites/'
 
   usuario: Usuario;
-  
+
   constructor(private httpClient: HttpClient) {
     this.usuario = new Usuario();
-    this.usuario.nome = 'julio';
-    this.usuario.senha = '123';
+    this.usuario.name= 'Renato Aragão'
+    this.usuario.login = 'Didi';
+    this.usuario.password = '123';
    }
 
   salvarConvite(formConvite:Cadastro):Observable<Cadastro>{

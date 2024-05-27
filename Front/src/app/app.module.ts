@@ -14,6 +14,8 @@ import { RecebimentoComponent } from './recebimento/recebimento.component';
 import { LikePipe } from './like.pipe';
 import { EntregaComponent } from './entrega/entrega.component';
 import { LoginComponent } from './login/login.component';
+import { HttpInterceptorModule } from './header-interceptor.service';
+import { PrincipalComponent } from './principal/principal.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { LoginComponent } from './login/login.component';
     LikePipe,
     EntregaComponent,
     LoginComponent,
+    PrincipalComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { LoginComponent } from './login/login.component';
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpInterceptorModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt'},

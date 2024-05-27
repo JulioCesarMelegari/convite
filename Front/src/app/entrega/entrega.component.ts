@@ -60,7 +60,7 @@ export class EntregaComponent implements OnInit {
         console.log('idParam nao nulo')
         console.log(this.idParam)
         console.log('dados formulario')
-        this.conviteEdit.usuarioEntrega=this.usuario.nome;
+        this.conviteEdit.usuarioEntrega=this.usuario.name;
         this.conviteEdit.entregue=this.formularioEntrega.value.entregue;
         this.conviteEdit.observacao=this.formularioEntrega.value.observacao;
         console.log(this.conviteEdit)

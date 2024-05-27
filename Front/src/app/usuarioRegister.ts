@@ -1,6 +1,4 @@
-export class Usuario {
-  id!: String;
-  name!:String;
+export class UsuarioRegister {
   login!: String;
   password!: String;
   role!: String;

@@ -17,7 +17,7 @@ export class ConviteComponent implements OnInit {
   success: boolean = false;
 
   conviteEdit: Convite;
-  
+
   cadastro:Cadastro;
 
   usuario: Usuario;
@@ -30,13 +30,12 @@ export class ConviteComponent implements OnInit {
     this.conviteEdit = new Convite();
     this.usuario = new Usuario();
     this.cadastro = new Cadastro();
-    this.usuario.nome = 'julio';
     this.formularioConvite = this.formBuilder.group({
       nomeCliente: [this.cadastro.nomeCliente, Validators.required],
       nomeVendedor: [this.cadastro.nomeVendedor, Validators.required],
       observacao: [this.cadastro.observacao],
       quantidade: [this.cadastro.quantidade, Validators.required],
-      usuarioCadastro: [this.usuario.nome],
+      usuarioCadastro: [this.service.usuario.name],
     });
   }
 

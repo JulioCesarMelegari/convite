@@ -15,7 +15,12 @@ body, html {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  float: left;
   cursor: default;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /*
@@ -132,4 +137,10 @@ body, html {
 .forgot-password:active,
 .forgot-password:focus{
   color: rgb(12, 97, 33);
+}
+.ng-valid[required], .ng-valid.required{
+  border-left: 5px solid #42a948;
+}
+.ng-invalid:not(form){
+  border-left: 5px solid #a94442;
 }
