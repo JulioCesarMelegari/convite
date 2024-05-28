@@ -1,4 +1,4 @@
 export class UsuarioLogin {
-  login!: String;
-  password!: String;
+  login!: string;
+  password!: string;
 }

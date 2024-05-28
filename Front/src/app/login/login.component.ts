@@ -32,25 +32,28 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit(){
-    this.usuario.login=this.formLogin.value.login;
-    this.usuario.password=this.formLogin.value.password;
-   // console.log("usuario no submit:")
+  onSubmit() {
+    this.usuario.login = this.formLogin.value.login;
+    this.usuario.password = this.formLogin.value.password;
+    // console.log("usuario no submit:")
     //console.log(this.usuario)
     this.loginService.login(this.usuario)
-      .subscribe(response =>{
-        //console.log(response)
-        var token = JSON.parse(JSON.stringify(response)).token;
-        console.log("logado no sistema")
-        localStorage.setItem("token", token);
-        //console.info("token no localStorage: " + localStorage.getItem("token"));
-        this.router.navigate(['principal']);
-      },
-      error=>{
-        console.error("Erro ao fazer login")
-        alert('Acesso negado!')
-      }
-    );
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          var token = JSON.parse(JSON.stringify(response)).token;
+          console.log("logado no sistema")
+          localStorage.setItem("token", token);
+          localStorage.setItem("usuario", this.usuario.login);
+          //console.info("token no localStorage: " + localStorage.getItem("token"));
+          this.router.navigate(['principal']);
+        },
+        error: (e) => {
+          console.error("Erro ao fazer login")
+          alert('Acesso negado!')
+        }
+      });
+
   }
 
 }

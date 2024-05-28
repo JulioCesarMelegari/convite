@@ -1,32 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-  link1:boolean=true;
-  link2:boolean=false;
-  link3:boolean=false;
-
-  Clique1(){
-    this.link1=true;
-    this.link2=false;
-    this.link3=false;
+  constructor(private loginService: LoginService) { }
+  ngOnInit(): void {
   }
-
-  Clique2(){
-    this.link1=false;
-    this.link2=true;
-    this.link3=false;
-  }
-
-  Clique3(){
-    this.link1=false;
-    this.link2=false;
-    this.link3=true;
+  deslogar(){
+    this.loginService.deslogar();
   }
 
 }

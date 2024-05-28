@@ -1,9 +1,12 @@
 <div class="container">
   <h1 class="mt-4">Controle de Convites para o Jantar 28 de maio</h1>
-  <nav class="navbar bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <form class="container-fluid justify-content-start">
       <button class="btn btn-outline-success me-2" type="button" routerLink="/home">Lista de Convites</button>
       <button class="btn btn-outline-success me-2" type="button" routerLink="/cadastrar">Cadastrar</button>
+      <button class="btn btn-outline-success me-2" type="button">
+        <i class="fa fa-sign-out" aria-hidden="true" (click)="deslogar()"></i> Sair
+      </button>
     </form>
   </nav>
 </div>

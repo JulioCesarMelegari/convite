@@ -27,15 +27,14 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                 		.requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-						//.requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
-						.requestMatchers(HttpMethod.POST,"/auth/register").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
+						//.requestMatchers(HttpMethod.POST,"/auth/register").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.POST,"/convites/cadastrar").hasAnyRole("ADMIN","USER")
 						.requestMatchers(HttpMethod.PUT,"/convites/pagar/{id}").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.PUT,"/convites/entregar/{id}").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.DELETE,"/convites").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.GET).hasAnyRole("ADMIN","USER")
 						.requestMatchers(HttpMethod.PUT,"/convites/cadastrar/{id}").hasRole("ADMIN")
-						
 						.anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
