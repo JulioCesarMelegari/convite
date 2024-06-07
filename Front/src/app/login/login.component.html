@@ -2,12 +2,12 @@
   <div class="card card-container">
       <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
       <p id="profile-name" class="profile-name-card"></p>
-      <form class="form-signin" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+      <form class="form-signin" #LoginForm="ngForm" (ngSubmit)="onSubmit()">
           <input type="text" class="form-control" placeholder="Login"
-            formControlName="login" name="login" [value]="usuario.login" required="true">
+          [(ngModel)]="usuario.login" name="login"required="true">
           <input type="password" class="form-control" placeholder="Senha"
-            formControlName="password" name="password" [value]="usuario.password" required="true">
-          <button type="submit" class="btn btn-primary" [disabled]="!formLogin.value.login || !formLogin.value.password">Entrar</button>
+           name="password" [(ngModel)]="usuario.password" required="true">
+          <button type="submit" class="btn btn-primary" [disabled]="!usuario.login || !usuario.password">Entrar</button>
       </form>
       <a href="#" class="forgot-password">
         Cadastrar

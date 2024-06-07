@@ -10,10 +10,10 @@ import { throwError } from 'rxjs/internal/observable/throwError'
 export class HeaderInterceptorService implements HttpInterceptor {
 
   public apiUrl: string = 'http://localhost:8080/convites/'
- // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  constructor(private loginService:LoginService){}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  //constructor(private loginService:LoginService){}
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    /*intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = this.loginService.obterTokenUsuario;
         const requestUrl: Array<any> = request.url.split('/');
         const apiUrl: Array<any> = this.apiUrl.split('/');
@@ -25,12 +25,12 @@ export class HeaderInterceptorService implements HttpInterceptor {
                     token: `${token}`
                 }
             });
-            return next.handle(request).pipe(catchError(error => {
+            return next.handle(request).pipe(error => {
                 if (error instanceof HttpErrorResponse && error.status === 401)
                   this.loginService.deslogar();
                 else
                   return throwError(error.message);
-            }));
+            });
         }
         else {
             return next.handle(request);
@@ -38,12 +38,10 @@ export class HeaderInterceptorService implements HttpInterceptor {
     }
 
   }
-}
+}*/
 
 
-
-
-    /*
+  
     if(localStorage.getItem('token') !==null){
       const token = 'Bearer '+ localStorage.getItem('token');
       const tokenRequest = req.clone({
@@ -53,14 +51,12 @@ export class HeaderInterceptorService implements HttpInterceptor {
     }else{
       return next.handle(req);
     }
-    *
+    
   }
-/*
+
   constructor() { }
-  */
 
-
-/*
+}
 @NgModule({
   providers:[{
     provide: HTTP_INTERCEPTORS,
@@ -72,4 +68,3 @@ export class HeaderInterceptorService implements HttpInterceptor {
 export class HttpInterceptorModule{
 
 }
-*/

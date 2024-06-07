@@ -2,7 +2,7 @@
   <ol class="breadcrumb mb-4">
       <h3 class="breadcrumb-item active">Entrega</h3>
   </ol>
-  <form action [formGroup]="formularioEntrega" (ngSubmit)="onSubmit()">
+  <form #entregaForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="row">
           <div class="col">
               <div class="alert alert-success" role="alert" *ngIf="success==true">
@@ -12,11 +12,11 @@
       </div>
       <div class="row">
           <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="entregue" name="entregue" id="true" [value]="true">
+              <input class="form-check-input" type="radio" [(ngModel)]="convite.entregue" name="entregue" id="true" [value]="true">
               <label class="form-check-label" for="flexRadioDefault1">Entregue</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="entregue" name="entregue" id="false" [value]="false">
+              <input class="form-check-input" type="radio" [(ngModel)]="convite.entregue" name="entregue" id="false" [value]="false">
               <label class="form-check-label" for="flexRadioDefault2">
                 Não Entregue
               </label>
@@ -27,8 +27,7 @@
           <div class="form-group">
             <label>Observação:</label>
             <textarea class="form-control" rows="3" class="form-control"
-              formControlName="observacao"
-              name="observacao" [value]="conviteEdit.observacao"></textarea>
+              [(ngModel)]="convite.observacao" name="observacao"></textarea>
           </div>
         </div>
       </div>

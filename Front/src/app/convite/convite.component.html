@@ -2,7 +2,7 @@
     <ol class="breadcrumb mb-4">
         <h3 class="breadcrumb-item active">Cadastro</h3>
     </ol>
-    <form action [formGroup]="formularioConvite" (ngSubmit)="onSubmit()">
+    <form #conviteForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col">
                 <div class="alert alert-success" role="alert" *ngIf="success==true">
@@ -13,12 +13,18 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label>Nome do Cliente:</label>
-                    <input type="text" class="form-control" formControlName="nomeCliente" name="nomeCliente"
-                        [value]="conviteEdit.nomeCliente">
+                    <label>Nome do Evento:</label>
+                    <input type="text" class="form-control" name="nomeCliente"
+                        [(ngModel)]="conviteCadastro.nomeEvento" [value]="conviteCadastro.nomeEvento">
                 </div>
-                <div *ngIf="formularioConvite.value.nomeCliente == null" class="mensagem">
-                    Campo obrigatório.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Nome do Cliente:</label>
+                    <input type="text" class="form-control" name="nomeCliente"
+                    [(ngModel)]="conviteCadastro.nomeCliente" [value]="conviteCadastro.nomeCliente">
                 </div>
             </div>
         </div>
@@ -26,30 +32,24 @@
             <div class="col">
                 <div class="form-group">
                     <label>Nome do Vendedor:</label>
-                    <input type="text" class="form-control" formControlName="nomeVendedor" name="nomeVendedor"
-                        [value]="conviteEdit.nomeVendedor">
-                </div>
-                <div *ngIf="formularioConvite.value.nomeVendedor == null" class="mensagem">
-                    Campo obrigatório.
+                    <input type="text" class="form-control" name="nomeVendedor"
+                    [(ngModel)]="conviteCadastro.nomeVendedor" [value]="conviteCadastro.nomeVendedor">
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label>Quantidade</label>
-                <input type="number" class="form-control" formControlName="quantidade" name="quantidade"
-                    [value]="conviteEdit.quantidade">
-            </div>
-            <div *ngIf="formularioConvite.value.quantidade == null" class="mensagem">
-                Campo obrigatório.
+                <input type="number" class="form-control" name="quantidade"
+                    [(ngModel)]="conviteCadastro.quantidade" [value]="conviteCadastro.quantidade">
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label>Observação:</label>
-                    <textarea class="form-control" rows="3" class="form-control" formControlName="observacao"
-                        name="observacao" [value]="conviteEdit.observacao">
+                    <textarea class="form-control" rows="3" class="form-control" name="observacao" 
+                    [(ngModel)]="conviteCadastro.observacao" [value]="conviteCadastro.observacao">
               </textarea>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         <br>
         <div class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid justify-content-start">
-                <button class="btn btn-outline-success me-2" type="submit" *ngIf="idParam==null"><i class="fa fa-save"></i> Salvar</button>
+                <button class="btn btn-outline-success me-2" type="submit" *ngIf="condicaoSalvar()==true"><i class="fa fa-save"></i> Salvar</button>
                 <button class="btn btn-outline-success me-2" type="submit" *ngIf="idParam!=null"><i class="fa fa-refresh"></i>Atualizar</button>
             </div>
         </div>

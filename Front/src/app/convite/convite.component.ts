@@ -5,6 +5,7 @@ import { ConviteService } from '../convite.service';
 import { Cadastro } from '../cadastro';
 import { Usuario } from '../usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-convite',
@@ -13,42 +14,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ConviteComponent implements OnInit {
 
-  formularioConvite: FormGroup;
   success: boolean = false;
-
-  conviteEdit: Convite;
-
-  cadastro:Cadastro;
-
-  usuario: Usuario;
+  //convite: Convite;
+  conviteCadastro:Cadastro;
   idParam: any;
 
   constructor(private service: ConviteService,
-    private formBuilder: FormBuilder,
+    private loginService: LoginService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
-    this.conviteEdit = new Convite();
-    this.usuario = new Usuario();
-    this.cadastro = new Cadastro();
-    this.formularioConvite = this.formBuilder.group({
-      nomeCliente: [this.cadastro.nomeCliente, Validators.required],
-      nomeVendedor: [this.cadastro.nomeVendedor, Validators.required],
-      observacao: [this.cadastro.observacao],
-      quantidade: [this.cadastro.quantidade, Validators.required],
-      usuarioCadastro: [this.service.usuario.name],
-    });
+    private activatedRoute: ActivatedRoute){
+      this.conviteCadastro = new Convite();
+      this.conviteCadastro.usuarioCadastro = this.loginService.nomeUsuarioLogin;
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       this.idParam = params.get('id');
-
       if (this.idParam !== null) {
         this.service.getConviteById(this.idParam).subscribe(response => {
-          this.conviteEdit = response;
-          console.log('atualizar convite');
-          console.log(this.conviteEdit);
-          this.formularioConvite.patchValue(this.conviteEdit);
+          this.conviteCadastro = response;
         });
       } else {
         console.log('idParam nulo');
@@ -57,34 +41,43 @@ export class ConviteComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formularioConvite.valid && this.idParam == null) {
-      this.service.salvarConvite(this.formularioConvite.value)
+    console.log(this.conviteCadastro);
+    if (this.condicaoSalvar() == true) {
+      this.service.salvarConvite(this.conviteCadastro)
         .subscribe(response => {
           this.success = true;
           console.log(response);
-          this.formularioConvite.reset(new Convite());
           setTimeout(() => { this.success = false; this.returnList() }, 700);
         })
     } else {
-      if (!this.formularioConvite.valid) {
-        console.log('formulario invalido')
-        console.log(this.formularioConvite.value)
-      } else {
+      if (this.conviteCadastro.nomeEvento == null && this.conviteCadastro.nomeCliente == null && this.conviteCadastro.nomeVendedor == null
+        && this.conviteCadastro.quantidade == null && this.idParam != null) {
+         alert('Preencher todos os campos do formulário!');
+       } 
+      if (this.conviteCadastro.nomeEvento != null && this.conviteCadastro.nomeCliente != null && this.conviteCadastro.nomeVendedor != null
+        && this.conviteCadastro.quantidade != null && this.idParam != null) {
         console.log('idParam nao nulo')
         console.log(this.idParam)
-        this.service.updateCadastrar(this.idParam, this.formularioConvite.value)
+        this.service.updateCadastrar(this.idParam, this.conviteCadastro)
           .subscribe(response => {
             this.success = true;
             console.log(response);
-            this.formularioConvite.reset(new Cadastro());
             setTimeout(() => { this.success = false; this.returnList() }, 700);
           });
       }
     }
   }
-
   returnList() {
     this.router.navigate(['/home'])
+  }
+
+  condicaoSalvar(){
+    var salvar: boolean
+    if(this.conviteCadastro.nomeEvento != null && this.conviteCadastro.nomeCliente != null && this.conviteCadastro.nomeVendedor != null
+      && this.conviteCadastro.quantidade != null && this.idParam == null){
+        return salvar = true;
+      }
+    return salvar = false;
   }
 
 }

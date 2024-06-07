@@ -14,34 +14,43 @@ export class LoginService {
   public baseUrlLogin: string = 'http://localhost:8080/auth/login'
   public baseUrlRegister: string = 'http://localhost:8080/auth/login/register'
 
-  constructor(private http: HttpClient, private router:Router) {}
+  nomeUsuarioLogin: String = 'Patativa do Assaré';
+    
 
-  login(usuarioLogin:UsuarioLogin):Observable<any>{
+  constructor(private http: HttpClient, private router: Router) { }
+
+  login(usuarioLogin: UsuarioLogin): Observable<any> {
     return this.http.post<any>(this.baseUrlLogin, usuarioLogin);
-
   }
-
-  register(usuarioRegister:UsuarioRegister):Observable<UsuarioRegister>{
+  register(usuarioRegister: UsuarioRegister): Observable<UsuarioRegister> {
     return this.http.post<UsuarioRegister>(this.baseUrlRegister, usuarioRegister);
   }
-
   deslogar() {
     localStorage.clear();
-    this.router.navigate(['login']);
-}
-get obterUsuarioLogado(): UsuarioLogin {
+    this.router.navigate(['home']);
+  }
+  get obterUsuarioLogado(): UsuarioLogin {
+    const usuario = window.localStorage.getItem('usuario')
+    return usuario ? JSON.parse(usuario) : [];
+  }
+  //obterTokenUsuario(): string {
+  //  const token = window.localStorage.getItem('token')
+  //  return token ? JSON.parse(token) : [];
+//  }
+  
+ // entregarHeader() {
+ //   const header: string = 'Bearer ' + this.obterTokenUsuario();
+ ///  return { Authorization: header }
+ // }
+  get logado(): boolean {
+    return localStorage.getItem('token') ? true : false;
+  }
 
-  const usuario = window.localStorage.getItem('usuario')
-  return usuario ? JSON.parse(usuario) : [];
-}
-
-get obterTokenUsuario(): string {
-
-  const token = window.localStorage.getItem('token')
-  return token ? JSON.parse(token) : [];
-}
-get logado(): boolean {
-  return localStorage.getItem('token') ? true : false;
-}
-
+  adicionarHeader(){
+      const tokensTRING = window.localStorage.getItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImpjbSIsImV4cCI6MTcxNzY4NTk1OX0.L6h_Z84XM6vpzKZaRLs7qDonGFUFM6aCbT0wazsotFM')
+      const token = JSON.parse(tokensTRING || '{}');
+      console.log(token);
+      const header = {'Authorization' :  'Bearer ' + tokensTRING};
+      return header;
+  }
 }

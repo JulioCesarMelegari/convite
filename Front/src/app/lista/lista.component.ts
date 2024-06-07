@@ -20,7 +20,7 @@ export class ListaComponent implements OnInit {
   }
 
   getList(){
-    this.listConvites = this.service.listarTodos();
+      this.listConvites = this.service.listarTodos();
   }
 
   getFormCadastrar() {

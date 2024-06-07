@@ -16,6 +16,7 @@ import { EntregaComponent } from './entrega/entrega.component';
 import { LoginComponent } from './login/login.component';
 import { HttpInterceptorModule } from './header-interceptor.service';
 import { PrincipalComponent } from './principal/principal.component';
+import { EventoComponent } from './evento/evento.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PrincipalComponent } from './principal/principal.component';
     EntregaComponent,
     LoginComponent,
     PrincipalComponent,
+    EventoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { PrincipalComponent } from './principal/principal.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpInterceptorModule
+    //HttpInterceptorModule,
+    FormsModule 
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt'},

@@ -38,7 +38,6 @@ export class RecebimentoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuario = this.service.usuario;
     this.activatedRoute.paramMap.subscribe(params => {
       this.idParam = params.get('id');
       if (this.idParam !== null) {

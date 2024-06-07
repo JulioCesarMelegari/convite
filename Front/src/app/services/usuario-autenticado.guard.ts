@@ -12,11 +12,12 @@ export class UsuarioAutenticadoGuard implements CanActivate {
     private router: Router) { }
   canActivate(){
     if (this.loginService.logado) {
-      console.log("guard usuario-autenticado(true): usuario logado")
+      this.router.navigate(['']);
+      //console.log("guard usuario-autenticado(true): usuario logado")
       return true;
     }
     this.router.navigate(['login']);
-    console.log("guard usuario-autenticado(false): usuario nao logado")
+    //console.log("guard usuario-autenticado(false): usuario nao logado")
     return false;
   }
   

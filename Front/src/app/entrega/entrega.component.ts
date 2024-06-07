@@ -5,6 +5,7 @@ import { Usuario } from '../usuario';
 import { ConviteService } from '../convite.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormEntrega } from '../formEntrega';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-entrega',
@@ -13,39 +14,25 @@ import { FormEntrega } from '../formEntrega';
 })
 export class EntregaComponent implements OnInit {
 
-  formularioEntrega: FormGroup;
   success: boolean = false;
 
-  conviteResponse: Convite;
-  conviteEdit:FormEntrega;
-
-  usuario:Usuario;
+  convite: Convite;
+  
+  nomeUsuarioLogin:String;
 
   idParam: any;
 
-  constructor(private service: ConviteService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
-    this.usuario=new Usuario();
-    this.conviteEdit = new FormEntrega();
-    this.conviteResponse = new Convite();
-    this.formularioEntrega = this.formBuilder.group({
-      entregue: [''],
-      observacao: [''],
-    });
+  constructor(private loginService: LoginService ,private service: ConviteService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.nomeUsuarioLogin= this.loginService.nomeUsuarioLogin;
+    this.convite = new Convite();
   }
 
   ngOnInit(): void {
-    this.usuario = this.service.usuario;
     this.activatedRoute.paramMap.subscribe(params => {
       this.idParam = params.get('id');
       if (this.idParam !== null) {
         this.service.getConviteById(this.idParam).subscribe(response => {
-          this.conviteResponse = response;
-          console.log('atualizar entrega');
-          console.log(this.conviteResponse);
-          this.formularioEntrega.patchValue(this.conviteResponse);
+          this.convite = response;
         });
       } else {
         console.log('idParam nulo');
@@ -57,18 +44,13 @@ export class EntregaComponent implements OnInit {
     if (this.idParam == null) {
       console.log("Id nulo!");
     } else {
-        console.log('idParam nao nulo')
-        console.log(this.idParam)
-        console.log('dados formulario')
-        this.conviteEdit.usuarioEntrega=this.usuario.name;
-        this.conviteEdit.entregue=this.formularioEntrega.value.entregue;
-        this.conviteEdit.observacao=this.formularioEntrega.value.observacao;
-        console.log(this.conviteEdit)
-        this.service.entregar(this.idParam, this.conviteEdit)
+        //console.log('dados formulario');
+        //console.log(this.convite);
+        this.convite.usuarioEntrega=this.nomeUsuarioLogin;
+        this.service.entregar(this.idParam, this.convite)
           .subscribe(response => {
             this.success = true;
-            console.log(response);
-            this.formularioEntrega.reset(new FormEntrega());
+            //console.log(response);
             setTimeout(() => { this.success = false; this.returnList()}, 700);
           });
       }

@@ -8,19 +8,18 @@ import { LoginComponent } from './login/login.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { UsuarioNaoAutenticadoGuard } from './services/usuario-nao-autenticado.guard';
 import { UsuarioAutenticadoGuard } from './services/usuario-autenticado.guard';
+import { EventoComponent } from './evento/evento.component';
 
 const routes: Routes = [
-  {path: 'login', component:LoginComponent, canActivate: [UsuarioNaoAutenticadoGuard]},
-  {path: '', component:PrincipalComponent, canActivate: [UsuarioAutenticadoGuard],
-    children:[
-      {path: 'home', component:ListaComponent},
-      {path: 'cadastrar', component:ConviteComponent},
-      {path: 'cadastrar/:id', component:ConviteComponent},
-      {path: 'receber/:id', component:RecebimentoComponent},
-      {path: 'entregar/:id', component:EntregaComponent},
-    ]
-  },
-
+ // {path: 'login', component:LoginComponent, /*canActivate: [UsuarioNaoAutenticadoGuard]*/},
+ // {path: '', component:LoginComponent, /*canActivate: [UsuarioNaoAutenticadoGuard]*/},
+  {path: 'principal', component:PrincipalComponent, /*canActivate: [UsuarioAutenticadoGuard]*/},
+  {path: 'home', component:ListaComponent},
+  {path: 'cadastrar', component:ConviteComponent},
+  {path: 'cadastrar/:id', component:ConviteComponent},
+  {path: 'receber/:id', component:RecebimentoComponent},
+  {path: 'entregar/:id', component:EntregaComponent},
+  {path: 'evento', component:EventoComponent},
 ];
 
 @NgModule({
