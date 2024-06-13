@@ -5,6 +5,7 @@ import { ConviteService } from '../convite.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormRecebimento } from '../formRecebimento';
 import { Convite } from '../convite';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-recebimento',
@@ -19,19 +20,20 @@ export class RecebimentoComponent implements OnInit {
 
   conviteResponse:Convite;
   conviteEdit: FormRecebimento;
-  usuario: Usuario;
+  nomeUsuarioLogin:string;
   idParam: any;
 
   constructor(private service: ConviteService,
+    private loginService: LoginService,
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
     this.conviteEdit = new Convite();
-    this.usuario = new Usuario();
+    this.nomeUsuarioLogin= this.loginService.nomeUsuarioLogin;
     this.conviteEdit=new FormRecebimento();
     this.conviteResponse=new Convite();
     this.formularioRecebimento = this.formBuilder.group({
-      usuarioPagamento: [this.usuario.name],
+      usuarioPagamento: [this.nomeUsuarioLogin],
       pago: [''],
       observacao: [''],
     });
@@ -43,8 +45,8 @@ export class RecebimentoComponent implements OnInit {
       if (this.idParam !== null) {
         this.service.getConviteById(this.idParam).subscribe(response => {
           this.conviteResponse = response;
-          console.log('atualizar recebimento');
-          console.log(this.conviteResponse);
+          //console.log('atualizar recebimento');
+         // console.log(this.conviteResponse);
           this.formularioRecebimento.patchValue(this.conviteResponse);//seta formulario com os dados do response
         });
       } else {
@@ -55,19 +57,20 @@ export class RecebimentoComponent implements OnInit {
 
   onSubmit() {
     if (this.idParam == null) {
-      console.log("Id nulo!");
+      alert('id Nulo!');
+      //console.log("Id nulo!");
     } else {
-        console.log('idParam nao nulo')
-        console.log(this.idParam)
-        console.log('dados formulario')
-        this.conviteEdit.usuarioPagamento=this.usuario.name;
+        //console.log('idParam nao nulo')
+       // console.log(this.idParam)
+       // console.log('dados formulario')
+        this.conviteEdit.usuarioPagamento=this.nomeUsuarioLogin;
         this.conviteEdit.pago=this.formularioRecebimento.value.pago;
         this.conviteEdit.observacao=this.formularioRecebimento.value.observacao;
-        console.log(this.conviteEdit);
+        //console.log(this.conviteEdit);
         this.service.pagar(this.idParam, this.conviteEdit)
           .subscribe(response => {
             this.success = true;
-            console.log(response);
+           // console.log(response);
             this.formularioRecebimento.reset(new FormRecebimento());
             setTimeout(() => { this.success = false; this.returnList()}, 700);
           });

@@ -1,72 +1,87 @@
 <div class="container">
-  <ol class="breadcrumb mb-4">
-    <h3 class="breadcrumb-item active">Convites Cadastrados:</h3>
-  </ol>
-    <table class="table table-hover table-sm">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Evento</th>
-          <th scope="col">Cliente</th>
-          <th scope="col">Vendedor</th>
-          <th scope="col">Qtdade</th>
-          <th scope="col">Obs.</th>
-          <th scope="col">Pago</th>
-          <th scope="col">Entregue</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let convite of listConvites |async">
-          <td>{{convite.nomeEvento}}</td>
-          <td>{{convite.nomeCliente}}</td>
-          <td>{{convite.nomeVendedor}}</td>
-          <td>{{convite.quantidade}}</td>
-          <td>{{convite.observacao}}</td>
-          <td>{{convite.pago==true ? '✔️': '⏳'}}</td>
-          <td>{{convite.entregue==true ? '✔️': '⏳'}}</td>
-          <td>
-            <div class="row">
-              <div class="col col-md-2">
-                <button class="btn btn-outline-success"
-                  routerLink="/cadastrar/{{convite.id}}"
-                  *ngIf="convite.pago==false && convite.entregue==false">
-                  <i class="fa fa-edit"></i>
-                </button>
-              </div>
-
-              <div class="col col-md-2">
-                <button class="btn btn-outline-success"
-                  routerLink="/receber/{{convite.id}}"
-                  *ngIf="convite.pago==false">
-                  <i class="fa fa-money" aria-hidden="true"></i>
-                </button>
-              </div>
-
-              <div class="col col-md-2">
-                <button class="btn btn-outline-success"
-                  routerLink="/entregar/{{convite.id}}"
-                  *ngIf="convite.entregue==false">
-                  <i class="fa fa-envelope" aria-hidden="true"></i>
-                </button>
-              </div>
-
-              <div class="col col-md-2">
-                <button class="btn btn-outline-success"
-                *ngIf="convite.pago==false && convite.entregue==false"
-                (click)="delete(convite.id!)">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-              </div>
-
-              <div class="col col-md-2">
-                <button class="btn btn-outline-success">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </button>
-              </div>
+    <div class="row">
+        <div class="col">
+            <h3>Convites Cadastrados:</h3>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="row align-items-center">
+                <div class="col-md-auto">
+                    <h5 style="text-align: right;">Selecione o Evento:</h5>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-select input-group-sm" name="eventoNome" [(ngModel)]="eventoNome" (change)="selecionarEvento()">
+                            <option>Selecione...</option>
+                            <option *ngFor="let evento of listEvento | async">{{evento.nomeEvento}}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-          </td>
-        </tr>
-        <tr>
+        </div>
+    </div>
+
+
+    <br>
+    <table class="table table-hover table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Evento</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Vendedor</th>
+                <th scope="col">Qtdade</th>
+                <th scope="col">Valor Unitário</th>
+                <th scope="col">Total</th>
+                <th scope="col">Pago</th>
+                <th scope="col">Entregue</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let convite of listConvites | async">
+                <td>{{convite.nomeEvento}}</td>
+                <td>{{convite.nomeCliente}}</td>
+                <td>{{convite.nomeVendedor}}</td>
+                <td>{{convite.quantidade}}</td>
+                <td>{{convite.valorUnitario | currency}}</td>
+                <td>{{convite.valorUnitario * convite.quantidade | currency}}</td>
+                <td>{{convite.pago ? '✔️' : '⏳'}}</td>
+                <td>{{convite.entregue ? '✔️' : '⏳'}}</td>
+                <td>
+                    <div class="row">
+                        <div class="col col-md-2">
+                            <button class="btn btn-outline-success" routerLink="/cadastrar/{{convite.id}}"
+                                *ngIf="!convite.pago && !convite.entregue">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="col col-md-2">
+                            <button class="btn btn-outline-success" routerLink="/receber/{{convite.id}}"
+                                *ngIf="!convite.pago">
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="col col-md-2">
+                            <button class="btn btn-outline-success" routerLink="/entregar/{{convite.id}}"
+                                *ngIf="!convite.entregue">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="col col-md-2">
+                            <button class="btn btn-outline-success" (click)="delete(convite.id!)"
+                                *ngIf="!convite.pago && !convite.entregue">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="col col-md-2">
+                            <button class="btn btn-outline-success" routerLink="/card/{{convite.id}}">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </tbody>
-      </table>
-  </div>
+    </table>
+</div>

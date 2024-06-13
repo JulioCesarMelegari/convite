@@ -14,7 +14,7 @@ export class LoginService {
   public baseUrlLogin: string = 'http://localhost:8080/auth/login'
   public baseUrlRegister: string = 'http://localhost:8080/auth/login/register'
 
-  nomeUsuarioLogin: String = 'Patativa do Assaré';
+  nomeUsuarioLogin: string = 'Patativa do Assaré';
     
 
   constructor(private http: HttpClient, private router: Router) { }

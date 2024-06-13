@@ -1,8 +1,9 @@
 export interface Cadastro {
-  nomeEvento: String;
-  nomeCliente: String;
-  usuarioCadastro: String;
-  nomeVendedor: String;
+  nomeEvento: string;
+  nomeCliente: string;
+  usuarioCadastro: string;
+  nomeVendedor: string;
   quantidade: number;
-  observacao: String;
+  observacao: string;
+  //valorUnitario: number;
 }

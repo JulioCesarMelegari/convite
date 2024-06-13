@@ -4,4 +4,5 @@ export class Evento{
     dados!: string;
     totalConvites!: number;
     status!: number;
+    valorUnitario!: number;
 }

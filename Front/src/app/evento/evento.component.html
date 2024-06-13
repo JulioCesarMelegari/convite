@@ -1,12 +1,12 @@
 <div class="container">
     <ol class="breadcrumb mb-4">
-        <h3 class="breadcrumb-item active">Cadastrar Evento</h3>
+        <li class="breadcrumb-item active">Cadastrar Evento</li>
     </ol>
-    <form #conviteForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #eventoForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col">
-                <div class="alert alert-success" role="alert" *ngIf="success==true">
-                    Convite Salvo!
+                <div class="alert alert-success" role="alert" *ngIf="success">
+                    Evento Salvo!
                 </div>
             </div>
         </div>
@@ -15,49 +15,56 @@
                 <div class="form-group">
                     <label>Id:</label>
                     <input type="text" class="form-control" name="id"
-                        [ngModel]="evento.id" disabled="">
+                        [ngModel]="evento.id" disabled>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col col-sm-5">
                 <div class="form-group">
                     <label>Nome do Evento:</label>
                     <input type="text" class="form-control" name="nomeEvento"
-                        [(ngModel)]="evento.nomeEvento" [value]="evento.nomeEvento">
+                        [(ngModel)]="evento.nomeEvento">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col col-sm-8">
                 <div class="form-group">
                     <label>Dados do Evento:</label>
                     <input type="text" class="form-control" name="dados"
-                    [(ngModel)]="evento.dados" [value]="evento.dados">
+                        [(ngModel)]="evento.dados">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col col-sm-3">
                 <div class="form-group">
                     <label>Total de convites:</label>
                     <input type="number" class="form-control" name="totalConvites"
-                    [(ngModel)]="evento.totalConvites" [value]="evento.totalConvites">
+                        [(ngModel)]="evento.totalConvites">
+                </div>
+            </div>
+            <div class="col col-sm-3">
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input type="number" class="form-control" name="valor"
+                        [(ngModel)]="evento.valorUnitario">
+                </div>
+            </div>
+            <div class="col col-sm-3" *ngIf="evento.status">
+                <div class="form-group">
+                    <label>Status:</label>
+                    <input type="number" class="form-control" name="status"
+                        [(ngModel)]="evento.status">
                 </div>
             </div>
         </div>
-        <div class="col" *ngIf="evento.status">
-            <div class="form-group">
-                <label>Status</label>
-                <input type="number" class="form-control" name="status"
-                    [(ngModel)]="evento.status" [value]="evento.status">
-            </div>
-        </div>
-         <br>
+
         <div class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid justify-content-start">
-                <button class="btn btn-outline-success me-2" type="submit" *ngIf="condicaoSalvar()==true"><i class="fa fa-save"></i> Salvar</button>
-                <button class="btn btn-outline-success me-2" type="submit" *ngIf="idParam!=null"><i class="fa fa-refresh"></i>Atualizar</button>
+                <button class="btn btn-outline-success me-2" type="submit" *ngIf="condicaoSalvar()"><i class="fa fa-save"></i> Salvar</button>
+                <button class="btn btn-outline-success me-2" type="submit" *ngIf="idParam"><i class="fa fa-refresh"></i> Atualizar</button>
             </div>
         </div>
     </form>

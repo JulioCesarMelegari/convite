@@ -39,13 +39,12 @@ export class EventoComponent implements OnInit {
 	//FINALIZADO("finalizado")
 
   onSubmit() {
-    this.evento.status=0;
     console.log(this.evento);
     if (this.condicaoSalvar() == true && this.idParam == null) {
       this.service.salvarEvento(this.evento)
         .subscribe(response => {
           this.success = true;
-          console.log(response);
+          //console.log(response);
           setTimeout(() => { this.success = false; this.returnList() }, 700);
         })
     } else {
@@ -53,17 +52,18 @@ export class EventoComponent implements OnInit {
          alert('Preencher todos os campos do formulário!');
        } 
       if (this.condicaoSalvar() ==true && this.idParam != null) {
-        console.log('idParam nao nulo')
-        console.log(this.idParam)
+        //console.log('idParam nao nulo')
+        //console.log(this.idParam)
         this.service.updateEvento(this.idParam, this.evento)
           .subscribe(response => {
             this.success = true;
-            console.log(response);
+            //console.log(response);
             setTimeout(() => { this.success = false; this.returnList() }, 700);
           });
       }
     }
   }
+  
   returnList() {
     this.router.navigate(['/home'])
   }

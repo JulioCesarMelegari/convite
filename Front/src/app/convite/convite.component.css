@@ -1,6 +1,47 @@
-li{
-    size: 2rem;
-}
-input{
-    color: rgb(11, 121, 35);
-}
+/* Estilização geral */
+.container {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .breadcrumb-item {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Estilização dos alertas */
+  .alert {
+    margin-top: 10px;
+  }
+  
+  /* Estilização dos campos de formulário */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-select,
+  .form-control {
+    width: 100%;
+  }
+  
+  textarea.form-control {
+    resize: vertical;
+  }
+  
+  /* Estilização dos botões */
+  .btn-outline-success {
+    margin-right: 10px;
+  }
+  
+  .navbar {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  /* Responsividade para dispositivos móveis */
+  @media (max-width: 768px) {
+    .col {
+      margin-bottom: 10px;
+    }
+  }

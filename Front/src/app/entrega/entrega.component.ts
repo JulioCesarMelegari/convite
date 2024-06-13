@@ -15,11 +15,9 @@ import { LoginService } from '../login.service';
 export class EntregaComponent implements OnInit {
 
   success: boolean = false;
-
   convite: Convite;
+  nomeUsuarioLogin:string;
   
-  nomeUsuarioLogin:String;
-
   idParam: any;
 
   constructor(private loginService: LoginService ,private service: ConviteService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -42,7 +40,8 @@ export class EntregaComponent implements OnInit {
 
   onSubmit() {
     if (this.idParam == null) {
-      console.log("Id nulo!");
+      alert('Id nulo!')
+      //console.log("Id nulo!");
     } else {
         //console.log('dados formulario');
         //console.log(this.convite);

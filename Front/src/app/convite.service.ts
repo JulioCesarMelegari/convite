@@ -7,6 +7,7 @@ import { FormRecebimento } from './formRecebimento';
 import { FormEntrega } from './formEntrega';
 import { Usuario } from './usuario';
 import { LoginService } from './login.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class ConviteService {
   }
 
   deletar(id:any){
-    return this.httpClient.delete(this.baseUrlConvite+`${id}`);
+    return this.httpClient.delete(this.baseUrlConvite +'/'+`${id}`);
   }
 
   listarTodos():Observable<Convite[]>{
@@ -53,6 +54,15 @@ export class ConviteService {
 
   listarPagos():Observable<Convite[]>{
     return this.httpClient.get<Convite[]>(this.baseUrlConvite + '/pagos');
+  }
+
+  listarConvitePorEvento(evento:string):Observable<Convite[]>{
+    return this.httpClient.get<Convite[]>(this.baseUrlConvite +'/busca/'+`${evento}`);
+  }
+  getConvitesPorEventoPagos(evento:string):Observable<Convite[]>{
+    return this.httpClient.get<Convite[]>(this.baseUrlConvite +'/busca/'+`${evento}`).pipe(
+      map((convites: Convite[]) => convites.filter((convite: Convite) => convite.pago === true))
+    );
   }
 
 }

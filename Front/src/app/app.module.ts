@@ -1,5 +1,4 @@
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +16,8 @@ import { LoginComponent } from './login/login.component';
 import { HttpInterceptorModule } from './header-interceptor.service';
 import { PrincipalComponent } from './principal/principal.component';
 import { EventoComponent } from './evento/evento.component';
+import { CardConviteComponent } from './card-convite/card-convite.component';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { EventoComponent } from './evento/evento.component';
     LoginComponent,
     PrincipalComponent,
     EventoComponent,
+    CardConviteComponent,
+    FinanceiroComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { EventoComponent } from './evento/evento.component';
     FormsModule 
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt'},
+    //{provide: LOCALE_ID, useValue: 'pt-br'},
     {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'}
   ],
   bootstrap: [AppComponent]

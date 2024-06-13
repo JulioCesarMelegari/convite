@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="col">
+        <h3>Resumo Financeiro:</h3>
+    </div>
+    <br>
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="row">
+                <div class="col-auto">
+                    <h5 class="mb-0">Selecione o Evento:</h5>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-select input-group-sm" name="eventoNome" [(ngModel)]="eventoNome" (change)="selecionarEvento()">
+                            <option>selecione...</option>
+                            <option *ngFor="let evento of listEvento | async">{{evento.nomeEvento}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="eventoNome!='Todos'">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">Resumo do Evento: {{eventoSelecionado}} </h3>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Total de convites:</h5>
+                        </div>
+                        <div class="col"><label>{{totalConvites}}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Convites vendidos:</h5>
+                        </div>
+                        <div class="col"><label>{{quantidadeVendidos}}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Convites a serem vendidos:</h5>
+                        </div>
+                        <div class="col"><label>{{totalConvites - quantidadeVendidos}}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Convites Pagos:</h5>
+                        </div>
+                        <div class="col"><label>{{convPagos}}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Convites não pagos:</h5>
+                        </div>
+                        <div class="col"><label>{{convNaoPagos}}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Valor recebido:</h5>
+                        </div>
+                        <div class="col"><label>{{totalRecebido | currency}}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Valor a receber:</h5>
+                        </div>
+                        <div class="col"><label>{{totalAreceber | currency}}</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-3" style="width: 15rem; text-align: center;">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="checkboxPago"
+                        [(ngModel)]="checkboxPago" [value]="true" (change)="loadConvitesPagos()" [checked]="checkboxPago">
+                    <label class="form-check-label" for="checkboxPago">Convites Pagos</label>
+                </div>
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="checkboxNaoPago"
+                        [(ngModel)]="checkboxNaoPago" [value]="true" (change)="loadConvitesPagos()" [checked]="checkboxNaoPago">
+                    <label class="form-check-label" for="checkboxNaoPago">Convites não Pagos</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h6>Convites Vendidos:</h6>
+    <div class="card">
+        <table class="table table-hover table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Evento</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">Qtdade</th>
+                    <th scope="col">Valor Unitário</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let convite of listConvites | async">
+                    <td>{{convite.nomeEvento}}</td>
+                    <td>{{convite.nomeCliente}}</td>
+                    <td>{{convite.nomeVendedor}}</td>
+                    <td>{{convite.quantidade}}</td>
+                    <td>{{convite.valorUnitario | currency}}</td>
+                    <td>{{convite.valorUnitario * convite.quantidade | currency}}</td>
+                    <td>{{convite.pago ? '✔️' : '⏳'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -9,6 +9,8 @@ import { PrincipalComponent } from './principal/principal.component';
 import { UsuarioNaoAutenticadoGuard } from './services/usuario-nao-autenticado.guard';
 import { UsuarioAutenticadoGuard } from './services/usuario-autenticado.guard';
 import { EventoComponent } from './evento/evento.component';
+import { CardConviteComponent } from './card-convite/card-convite.component';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 const routes: Routes = [
  // {path: 'login', component:LoginComponent, /*canActivate: [UsuarioNaoAutenticadoGuard]*/},
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: 'receber/:id', component:RecebimentoComponent},
   {path: 'entregar/:id', component:EntregaComponent},
   {path: 'evento', component:EventoComponent},
+  {path: 'card/:id', component:CardConviteComponent},
+  {path: 'financeiro', component: FinanceiroComponent},
 ];
 
 @NgModule({

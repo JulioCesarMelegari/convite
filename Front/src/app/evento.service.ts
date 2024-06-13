@@ -34,5 +34,8 @@ export class EventoService {
   deletar(id:any){
     return this.httpClient.delete(this.baseUrlConvite + '/'+`${id}`);
   }
+  getEventoPorNome(eventoNome:string):Observable<Evento>{
+    return this.httpClient.get<Evento>(this.baseUrlConvite +'/busca/'+`${eventoNome}`);
+  }
 
 }

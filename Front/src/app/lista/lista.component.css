@@ -1,4 +1,38 @@
-th,td{
-    font-size: 11px;
-    text-align: center;
-}
+/* Estilização geral */
+.container {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .breadcrumb-item {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Estilização dos cabeçalhos */
+  h3 {
+    margin-bottom: 1rem;
+  }
+  
+  h5 {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Estilização dos botões */
+  .btn-outline-success {
+    margin-right: 10px;
+  }
+  .table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  
+  /* Responsividade para dispositivos móveis */
+  @media (max-width: 768px) {
+    .col {
+      margin-bottom: 10px;
+    }
+  }
